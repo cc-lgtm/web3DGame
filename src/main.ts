@@ -11,8 +11,13 @@ import {
   Vector4,
   StandardMaterial,
   Texture,
-  Mesh
+  Mesh,
+  SceneLoader,
 } from 'babylonjs'
+
+import * as earcut from "earcut";
+(window as any).earcut = earcut;
+import { buildCar } from './build/buildCar'
 
 const createScene = (engine: Engine): Scene => {
   // 场景
@@ -46,9 +51,6 @@ const createScene = (engine: Engine): Scene => {
   roof.rotation.z = Math.PI / 2
   roof.position.y = 1.22
 
-  // 组合材质
-  const house = Mesh.MergeMeshes([box, roof])
-
   // 灯光
   const light = new HemisphericLight("light", new Vector3(0, 1, 0), scene)
   // 声音
@@ -61,12 +63,16 @@ const createScene = (engine: Engine): Scene => {
   ground.material = groundMat
 
   const roofMat = new StandardMaterial("roofMat", scene)
-  roofMat.diffuseTexture = new Texture('/src/material/roof_mat.jpg', scene)
+  roofMat.diffuseTexture = new Texture('https://assets.babylonjs.com/environments/roof.jpg', scene)
   const boxMat = new StandardMaterial("boxMat", scene)
-  boxMat.diffuseTexture = new Texture('/src/material/box_mat.jpg', scene)
+  boxMat.diffuseTexture = new Texture("https://assets.babylonjs.com/environments/cubehouse.png", scene)
 
   const houseMat = new StandardMaterial("houseMat", scene)
-  houseMat.diffuseTexture = new Texture('/src/material/roof_mat.jpg', scene)
+  houseMat.diffuseTexture = new Texture('https://assets.babylonjs.com/environments/cubehouse.png', scene)
+
+  // 组合材质
+  const house = Mesh.MergeMeshes([box, roof], false, false, undefined, undefined, undefined)
+  house!.position.x = 3
 
   roof.material = roofMat
   box.material = boxMat
@@ -87,6 +93,35 @@ const createScene = (engine: Engine): Scene => {
 
     scene.addMesh(houseClone)
   // }
+
+  SceneLoader.ImportMeshAsync("", "https://assets.babylonjs.com/meshes/", "both_houses_scene.babylon").then(res => {
+    console.log(res.meshes)
+    res.meshes.map((meshe, index) => {
+      if (index === 2) {
+        meshe.position.x = 3
+        meshe.position.z = -3
+        return
+      }
+      meshe.position.x = -index - 2
+    })
+  })
+
+  // buildCar
+  const car = buildCar(scene)
+  car.position.x = 4
+  car.position.y = 0.25
+  car.rotation.x = -10
+
+  SceneLoader.ImportMeshAsync("", "https://assets.babylonjs.com/meshes/", "car.babylon").then((res) =>  {
+    const wheelRB = scene.getMeshByName("wheelRB");
+    const wheelRF = scene.getMeshByName("wheelRF");
+    const wheelLB = scene.getMeshByName("wheelLB");
+    const wheelLF = scene.getMeshByName("wheelLF");
+    scene.beginAnimation(wheelRB, 0, 30, true);
+    scene.beginAnimation(wheelRF, 0, 30, true);
+    scene.beginAnimation(wheelLB, 0, 30, true);
+    scene.beginAnimation(wheelLF, 0, 30, true);
+  });
 
   scene.addMesh(box)
   scene.addLight(light)
@@ -146,4 +181,3 @@ const scene = createScene(engine)
 engine.runRenderLoop(() => {
   scene.render()
 })
-
