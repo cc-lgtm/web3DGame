@@ -39,6 +39,13 @@
   resolved "https://registry.npmmirror.com/@emmetio/scanner/-/scanner-1.0.0.tgz#065b2af6233fe7474d44823e3deb89724af42b5f"
   integrity sha512-8HqW8EVqjnCmWXVpqAOZf+EGESdkR27odcMMMGefgKXtar00SoYNSryGv//TELI4T3QFsECo78p+0lmalk/CFA==
 
+"@types/babylonjs@^2.4.1":
+  version "2.4.1"
+  resolved "https://registry.npmmirror.com/@types/babylonjs/-/babylonjs-2.4.1.tgz#432e9a40777bca5aefec118af018ff57fb1098da"
+  integrity sha512-vt6db2PxisxsnLvL5holHLV9vMJzELAhFq54syX/tKncTmjeraQSR1W20j9/KYLEpAFU18u76rK8utb8JlUrtQ==
+  dependencies:
+    babylonjs "*"
+
 "@vitejs/plugin-vue@^2.2.0":
   version "2.2.4"
   resolved "https://registry.npmmirror.com/@vitejs/plugin-vue/-/plugin-vue-2.2.4.tgz#ab8b199ca82496b05d2654c5f34ffcf9b947243d"
@@ -222,6 +229,18 @@ babel-walk@3.0.0-canary-5:
   integrity sha512-GAwkz0AihzY5bkwIY5QDR+LvsRQgB/B+1foMPvi0FZPMl5fjD7ICiznUiBdLYMH1QYe6vqu4gWYytZOccLouFw==
   dependencies:
     "@babel/types" "^7.9.6"
+
+babylonjs-gui@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.npmmirror.com/babylonjs-gui/-/babylonjs-gui-4.2.2.tgz#73ce9e2ae6caba97475557e32e4961ff4d44482a"
+  integrity sha512-LCjj9bZMR7TCJw5PizhS+lHRxhOWcQ6wGVEs6DjY5leT6Lb9jUD9LwqTemfd1KobZLOg5/TY89LqMzNLkDvtng==
+  dependencies:
+    babylonjs "4.2.2"
+
+babylonjs@*, babylonjs@4.2.2, babylonjs@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.npmmirror.com/babylonjs/-/babylonjs-4.2.2.tgz#ee6d22799b423d476208731fcd7d3212b44d1345"
+  integrity sha512-p7mTi6+nLuWJTLbwxEJxLOh/QMHMV2KA0bviEoQSK5VtsAq1F0JghoOZYRs4aEqAZF/deFPWvMQk1vbXJ+4eEA==
 
 call-bind@^1.0.2:
   version "1.0.2"
