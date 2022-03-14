@@ -2,6 +2,7 @@
   import { Engine } from 'babylonjs'
   import { onMounted } from 'vue'
   import { createScene } from './createScene'
+  import Home from './GUI/Home.vue'
 
   onMounted(async () => {
     const canvas = document.querySelector('.gameCanvas') as HTMLCanvasElement
@@ -15,6 +16,7 @@
 
 <template>
   <canvas class="gameCanvas"></canvas>
+  <Home></Home>
 </template>
 
 <style>

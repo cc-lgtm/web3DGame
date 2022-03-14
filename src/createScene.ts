@@ -5,6 +5,9 @@ import {
   Vector3
 } from 'babylonjs'
 import { GameSound } from './sound/GameSound'
+import { GameGUI } from './GUI/gameGUI'
+import { MainScene } from './level/prologue'
+import { startGame } from './utils'
 
 export async function createScene(engine: Engine, canvas: HTMLCanvasElement): Promise<Scene> {
   const scene = new Scene(engine)
@@ -16,6 +19,11 @@ export async function createScene(engine: Engine, canvas: HTMLCanvasElement): Pr
     loop: true,
     autoplay: true
   })
+  // const gui = new GameGUI(scene)
+  // gui.mainMenu()
+
+  const mainScene = new MainScene(scene)
+  mainScene.loadScene(startGame, true)
 
   return scene
 }
